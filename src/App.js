@@ -1,5 +1,5 @@
 import "./App.css";
-import { Route, Routes } from "react-router-dom";
+import { Route, Routes, useNavigate } from "react-router-dom";
 import {
   Dashboard,
   Exercises,
@@ -9,8 +9,24 @@ import {
   Signup,
 } from "./pages/index";
 import { Navbar, ProtectedRoute } from "./components/index";
+import { useDispatch } from "react-redux";
+import { useEffect } from "react";
+import { SET_USER_DATA } from "./redux/actionConstants";
 
 function App() {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const token = localStorage.getItem("token");
+  const user = JSON.parse(localStorage.getItem("user"));
+
+  useEffect(() => {
+    if (token) {
+      dispatch({ type: SET_USER_DATA, payload: user });
+
+      navigate("/");
+    }
+  }, []);
+
   return (
     <div className="App">
       <Navbar />

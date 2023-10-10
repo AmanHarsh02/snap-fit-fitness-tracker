@@ -1,5 +1,8 @@
 import { useDispatch, useSelector } from "react-redux";
-import { userLoginInput } from "../redux/actions/userActions";
+import { userLogin, userLoginInput } from "../redux/actions/userActions";
+import { Link, useNavigate } from "react-router-dom";
+import { useEffect } from "react";
+import { RESET_LOGIN } from "../redux/actionConstants";
 
 const gradientColor = "bg-gradient-to-r from-blue-600 to-violet-500";
 
@@ -8,11 +11,27 @@ const gradientColorOnHover =
 
 export const Login = () => {
   const userInput = useSelector((state) => state.authState.loginInputFields);
+  const error = useSelector((state) => state.authState.loginError);
+  const isLoggedIn = useSelector((state) => state.authState.isLoggedIn);
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const handleLogin = (e) => {
     e.preventDefault();
+    const { email, password } = userInput;
+
+    dispatch(userLogin(email, password));
   };
+
+  useEffect(() => {
+    if (isLoggedIn) {
+      navigate("/");
+    }
+
+    return function () {
+      dispatch({ type: RESET_LOGIN });
+    };
+  }, [isLoggedIn]);
 
   return (
     <div className="p-4 min-h-[80vh] flex justify-center items-center">
@@ -47,9 +66,18 @@ export const Login = () => {
           />
         </label>
 
+        <Link
+          to="/signup"
+          className="mt-1 max-w-max text-blue-600 hover:underline"
+        >
+          signup
+        </Link>
+
+        {error && <small className="text-red-600">{`* ${error}`}</small>}
+
         <button
           type="submit"
-          className={`text-white ${gradientColor} ${gradientColorOnHover} p-1 rounded-md mt-4`}
+          className={`text-white ${gradientColor} ${gradientColorOnHover} p-1 rounded-md mt-2`}
         >
           Login
         </button>
