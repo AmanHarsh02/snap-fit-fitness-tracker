@@ -16,4 +16,19 @@ const validateLoginInput = (email, password) => {
   return true;
 };
 
-export { validateSignupInput, validateLoginInput };
+const validateExerciseInput = (userInput) => {
+  const { exerciseName, durationMinutes } = userInput;
+
+  if (
+    !exerciseName ||
+    !durationMinutes ||
+    exerciseName === "Select an exercise" ||
+    durationMinutes === "Select duration"
+  ) {
+    return false;
+  }
+
+  return true;
+};
+
+export { validateSignupInput, validateLoginInput, validateExerciseInput };

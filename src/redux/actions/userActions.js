@@ -42,7 +42,6 @@ export const userLogin = (email, password) => async (dispatch) => {
 
     dispatch({ type: SET_USER_DATA, payload: user });
   } catch (error) {
-    console.log(error);
     dispatch({ type: SET_LOGIN_ERROR, payload: error.message });
   }
 };
