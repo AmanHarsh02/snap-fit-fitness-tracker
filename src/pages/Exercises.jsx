@@ -7,11 +7,7 @@ import {
 import { ExerciseCard } from "../components/index";
 import { SET_EXERCISE_ERROR } from "../redux/actionConstants";
 import { useEffect } from "react";
-
-const gradientColor = "bg-gradient-to-r from-blue-600 to-violet-500";
-
-const gradientColorOnHover =
-  "hover:bg-gradient-to-r hover:from-violet-600 hover:to-blue-500 ";
+import { gradientColor, gradientColorOnHover } from "../utils/gradientColors";
 
 export const Exercises = () => {
   const { _id: userId } = useSelector((state) => state.authState.user);

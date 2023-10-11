@@ -8,7 +8,7 @@ export const ExerciseCard = ({ exercise, color }) => {
   return (
     <div
       style={{ backgroundColor: color }}
-      className="flex flex-col gap-3 min-w-[12%] py-1 px-2 rounded-md border shadow-lg hover:shadow-blue-200 hover:border-blue-500 transition-all ease-in-out duration-300"
+      className="flex flex-col gap-3 min-w-[12%] py-1 px-2 rounded-md border shadow-lg hover:shadow-blue-200 hover:border-blue-300 transition-all ease-in-out duration-300"
     >
       <div className="flex gap-8 justify-between">
         <strong>{exerciseName}</strong>

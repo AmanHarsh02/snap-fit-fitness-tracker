@@ -3,11 +3,7 @@ import { userLogin, userLoginInput } from "../redux/actions/userActions";
 import { Link, useNavigate } from "react-router-dom";
 import { useEffect } from "react";
 import { RESET_LOGIN } from "../redux/actionConstants";
-
-const gradientColor = "bg-gradient-to-r from-blue-600 to-violet-500";
-
-const gradientColorOnHover =
-  "hover:bg-gradient-to-r hover:from-violet-600 hover:to-blue-500 ";
+import { gradientColor, gradientColorOnHover } from "../utils/gradientColors";
 
 export const Login = () => {
   const userInput = useSelector((state) => state.authState.loginInputFields);
