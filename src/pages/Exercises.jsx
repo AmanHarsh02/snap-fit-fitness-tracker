@@ -36,7 +36,7 @@ export const Exercises = () => {
     <div className="p-4 flex flex-col gap-4">
       <h2>Add a new exercise:</h2>
 
-      <div className="flex gap-2">
+      <div className="flex gap-2 flex-wrap">
         <select
           onChange={(e) =>
             dispatch(

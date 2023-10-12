@@ -17,12 +17,12 @@ export const Navbar = () => {
   };
 
   return (
-    <nav className="px-4 py-3 flex justify-between shadow-md rounded-b-md">
+    <nav className="px-4 py-3 flex justify-between flex-wrap shadow-md rounded-b-md">
       <h1 className={`${gradientColor}`}>
         <NavLink to="/">Snap Fit - Fitness Tracker</NavLink>
       </h1>
 
-      <ul className="flex items-center gap-4 font-semibold">
+      <ul className="flex items-center gap-2 md:gap-4 flex-wrap font-semibold">
         <li className={`${gradientColorOnHover}`}>
           <NavLink to="/">Dashboard</NavLink>
         </li>
