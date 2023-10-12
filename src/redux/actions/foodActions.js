@@ -1,6 +1,7 @@
 import {
   ADD_FOOD,
   ADD_FOOD_CARD_COLOR,
+  DELETE_FOOD,
   SET_FOODS,
   SET_FOOD_CARD_COLORS,
   SET_FOOD_ERROR,
@@ -11,7 +12,7 @@ import {
   validateExerciseInput,
   validateFoodInput,
 } from "../../utils/validationUtils";
-import { addFood, getFoods } from "../../services/foodServices";
+import { addFood, deleteFood, getFoods } from "../../services/foodServices";
 
 export const foodInput = (userInput) => ({
   type: SET_FOOD_INPUT,
@@ -49,6 +50,18 @@ export const getAllFoods = (userId) => async (dispatch) => {
 
     dispatch({ type: SET_FOODS, payload: foods });
     dispatch({ type: SET_FOOD_CARD_COLORS, payload: foods });
+  } catch (error) {
+    dispatch({ type: SET_FOOD_ERROR, payload: error.message });
+  }
+};
+
+export const removeFood = (foodId) => async (dispatch) => {
+  try {
+    dispatch({ type: SET_FOOD_LOADING });
+
+    const deletedFood = await deleteFood(foodId);
+
+    dispatch({ type: DELETE_FOOD, payload: foodId });
   } catch (error) {
     dispatch({ type: SET_FOOD_ERROR, payload: error.message });
   }

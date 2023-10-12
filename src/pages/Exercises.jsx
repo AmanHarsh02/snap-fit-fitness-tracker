@@ -46,6 +46,7 @@ export const Exercises = () => {
               })
             )
           }
+          value={userInput.exerciseName}
           className="border-2 outline-2 outline-blue-500 rounded-md"
         >
           {exerciseList.map((exercise) => {
@@ -62,10 +63,11 @@ export const Exercises = () => {
             dispatch(
               exerciseInput({
                 ...userInput,
-                durationMinutes: parseInt(e.target.value),
+                durationMinutes: e.target.value,
               })
             )
           }
+          value={userInput.durationMinutes}
           className="border-2 outline-2 outline-blue-500 rounded-md"
         >
           {durationList.map((duration, i) => {

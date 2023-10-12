@@ -1,6 +1,7 @@
 import {
   ADD_EXERCISE,
   ADD_EXERCISE_CARD_COLOR,
+  DELETE_EXERCISE,
   SET_EXERCISES,
   SET_EXERCISE_CARD_COLORS,
   SET_EXERCISE_ERROR,
@@ -9,7 +10,11 @@ import {
 } from "../actionConstants";
 import { validateExerciseInput } from "../../utils/validationUtils";
 import { allExercises } from "../../utils/exerciseUtils";
-import { addExercise, getExercises } from "../../services/exerciseServices";
+import {
+  addExercise,
+  deleteExercise,
+  getExercises,
+} from "../../services/exerciseServices";
 
 export const exerciseInput = (userInput) => ({
   type: SET_EXERCISE_INPUT,
@@ -28,11 +33,17 @@ export const addNewExercise = (userInput, userId) => async (dispatch) => {
       dispatch({ type: SET_EXERCISE_ERROR, payload: "" });
     }
 
-    const caloriesBurned =
-      allExercises[userInput.exerciseName].calorieRate *
-      userInput.durationMinutes;
+    const duration = parseInt(userInput.durationMinutes);
 
-    const exerciseData = { ...userInput, caloriesBurned, userId };
+    const caloriesBurned =
+      allExercises[userInput.exerciseName].calorieRate * duration;
+
+    const exerciseData = {
+      ...userInput,
+      durationMinutes: duration,
+      caloriesBurned,
+      userId,
+    };
 
     const createdExercise = await addExercise(exerciseData);
 
@@ -51,6 +62,18 @@ export const getAllExercises = (userId) => async (dispatch) => {
 
     dispatch({ type: SET_EXERCISES, payload: exercises });
     dispatch({ type: SET_EXERCISE_CARD_COLORS, payload: exercises });
+  } catch (error) {
+    dispatch({ type: SET_EXERCISE_ERROR, payload: error.message });
+  }
+};
+
+export const removeExercise = (exerciseId) => async (dispatch) => {
+  try {
+    dispatch({ type: SET_EXERCISE_LOADING });
+
+    const deletedExercise = await deleteExercise(exerciseId);
+
+    dispatch({ type: DELETE_EXERCISE, payload: exerciseId });
   } catch (error) {
     dispatch({ type: SET_EXERCISE_ERROR, payload: error.message });
   }

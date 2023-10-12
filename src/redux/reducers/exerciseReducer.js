@@ -1,6 +1,7 @@
 import {
   ADD_EXERCISE,
   ADD_EXERCISE_CARD_COLOR,
+  DELETE_EXERCISE,
   SET_EXERCISES,
   SET_EXERCISE_CARD_COLORS,
   SET_EXERCISE_ERROR,
@@ -56,6 +57,25 @@ export const exerciseReducer = (state = initialState, action) => {
       newColors.push(newColor);
 
       return { ...state, exerciseCardColors: newColors };
+    case DELETE_EXERCISE:
+      const exerciseId = action.payload;
+      let colorIndex = 0;
+      const updatedExercises = state.exercises.filter(({ _id }, i) => {
+        if (_id === exerciseId) {
+          colorIndex = i;
+        }
+        return _id !== exerciseId;
+      });
+
+      const updatedColors = state.exerciseCardColors.filter(
+        (_, i) => i !== colorIndex
+      );
+
+      return {
+        ...state,
+        exercises: updatedExercises,
+        exerciseCardColors: updatedColors,
+      };
     case SET_EXERCISE_LOADING:
       return { ...state, exerciseLoading: true };
     case SET_EXERCISE_ERROR:

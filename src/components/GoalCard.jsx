@@ -1,4 +1,10 @@
+import { useState } from "react";
+import { useDispatch } from "react-redux";
+import { BiTrash as DeleteIcon } from "react-icons/bi";
+import { removeGoal } from "../redux/actions/goalActions";
+
 export const GoalCard = ({ goal, color }) => {
+  const [isHovered, setIsHovered] = useState(false);
   const {
     _id,
     goalName,
@@ -7,17 +13,32 @@ export const GoalCard = ({ goal, color }) => {
     targetCaloriesValue,
     status,
   } = goal;
+  const dispatch = useDispatch();
 
   const date = new Date(targetDate);
 
+  const handleDeleteGoal = () => {
+    dispatch(removeGoal(_id));
+  };
+
   return (
     <div
+      onMouseEnter={() => setIsHovered(true)}
+      onMouseLeave={() => setIsHovered(false)}
       style={{ backgroundColor: color }}
       className="flex flex-col gap-3 min-w-[12%] py-1 px-2 rounded-md border shadow-lg hover:shadow-blue-200 hover:border-blue-300 transition-all ease-in-out duration-300"
     >
       <div className="flex gap-8 justify-between">
         <strong>{goalName}</strong>
-        <p>{status}</p>
+        {!isHovered && <p>{status}</p>}
+        {isHovered && (
+          <div
+            onClick={handleDeleteGoal}
+            className="cursor-pointer hover:bg-white p-1 rounded-full"
+          >
+            <DeleteIcon fill="red" />
+          </div>
+        )}
       </div>
 
       <p>Desc: {goalDescription}</p>

@@ -42,4 +42,21 @@ const getExercises = async (userId) => {
   }
 };
 
-export { addExercise, getExercises };
+const deleteExercise = async (exerciseId) => {
+  try {
+    const response = await axios.delete(`${BASE_URL}/exercises/${exerciseId}`, {
+      headers: {
+        "Content-Type": "application/json",
+        authorization: token,
+      },
+    });
+
+    const { deletedExercise } = response.data;
+
+    return deletedExercise;
+  } catch (error) {
+    throw error;
+  }
+};
+
+export { addExercise, getExercises, deleteExercise };

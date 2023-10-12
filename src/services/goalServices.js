@@ -42,4 +42,21 @@ const getGoals = async (userId) => {
   }
 };
 
-export { addGoal, getGoals };
+const deleteGoal = async (goalId) => {
+  try {
+    const response = await axios.delete(`${BASE_URL}/goals/${goalId}`, {
+      headers: {
+        "Content-Type": "application/json",
+        authorization: token,
+      },
+    });
+
+    const { deletedGoal } = response.data;
+
+    return deleteGoal;
+  } catch (error) {
+    throw error;
+  }
+};
+
+export { addGoal, getGoals, deleteGoal };

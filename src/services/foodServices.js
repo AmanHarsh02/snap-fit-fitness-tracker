@@ -42,4 +42,21 @@ const getFoods = async (userId) => {
   }
 };
 
-export { addFood, getFoods };
+const deleteFood = async (foodId) => {
+  try {
+    const response = await axios.delete(`${BASE_URL}/foods/${foodId}`, {
+      headers: {
+        "Content-Type": "application/json",
+        authorization: token,
+      },
+    });
+
+    const { deletedFood } = response.data;
+
+    return deletedFood;
+  } catch (error) {
+    throw error;
+  }
+};
+
+export { addFood, getFoods, deleteFood };

@@ -1,6 +1,7 @@
 import {
   ADD_GOAL,
   ADD_GOAL_CARD_COLOR,
+  DELETE_GOAL,
   SET_GOALS,
   SET_GOAL_CARD_COLORS,
   SET_GOAL_ERROR,
@@ -8,7 +9,7 @@ import {
   SET_GOAL_LOADING,
 } from "../actionConstants";
 import { validateGoalInput } from "../../utils/validationUtils";
-import { addGoal, getGoals } from "../../services/goalServices";
+import { addGoal, deleteGoal, getGoals } from "../../services/goalServices";
 
 export const goalInput = (userInput) => ({
   type: SET_GOAL_INPUT,
@@ -55,6 +56,18 @@ export const getAllGoals = (userId) => async (dispatch) => {
 
     dispatch({ type: SET_GOALS, payload: goals });
     dispatch({ type: SET_GOAL_CARD_COLORS, payload: goals });
+  } catch (error) {
+    dispatch({ type: SET_GOAL_ERROR, payload: error.message });
+  }
+};
+
+export const removeGoal = (goalId) => async (dispatch) => {
+  try {
+    dispatch({ type: SET_GOAL_LOADING });
+
+    const deletedGoal = await deleteGoal(goalId);
+
+    dispatch({ type: DELETE_GOAL, payload: goalId });
   } catch (error) {
     dispatch({ type: SET_GOAL_ERROR, payload: error.message });
   }

@@ -1,6 +1,7 @@
 import {
   ADD_GOAL,
   ADD_GOAL_CARD_COLOR,
+  DELETE_GOAL,
   RESET_GOAL,
   SET_GOALS,
   SET_GOAL_CARD_COLORS,
@@ -63,6 +64,25 @@ export const goalReducer = (state = initialState, action) => {
       newColors.push(newColor);
 
       return { ...state, goalCardColors: newColors };
+    case DELETE_GOAL:
+      const goalId = action.payload;
+      let colorIndex = 0;
+      const updatedGoals = state.goals.filter(({ _id }, i) => {
+        if (_id === goalId) {
+          colorIndex = i;
+        }
+        return _id !== goalId;
+      });
+
+      const updatedColors = state.goalCardColors.filter(
+        (_, i) => i !== colorIndex
+      );
+
+      return {
+        ...state,
+        goals: updatedGoals,
+        goalCardColors: updatedColors,
+      };
     case SET_GOAL_LOADING:
       return { ...state, goalLoading: true };
     case SET_GOAL_ERROR:

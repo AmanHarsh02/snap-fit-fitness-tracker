@@ -58,7 +58,7 @@ export const Goals = () => {
                 })
               )
             }
-            value={userInput.description}
+            value={userInput.goalDescription}
             type="text"
             placeholder="enter description"
             className="border-2 rounded-md max-w-[10rem] px-1 outline-2 outline-blue-500"
@@ -110,6 +110,7 @@ export const Goals = () => {
               })
             )
           }
+          value={userInput.status}
           className="border-2 outline-2 outline-blue-500 rounded-md h-max self-end px-2"
         >
           {goalStatus.map((status) => {

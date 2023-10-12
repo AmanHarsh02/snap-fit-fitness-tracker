@@ -7,6 +7,7 @@ import {
   SET_FOOD_INPUT,
   SET_FOOD_LOADING,
   RESET_FOOD,
+  DELETE_FOOD,
 } from "../actionConstants";
 import randomColor from "randomcolor";
 
@@ -71,7 +72,25 @@ export const foodReducer = (state = initialState, action) => {
         foodError: action.payload,
         foodLoading: false,
       };
+    case DELETE_FOOD:
+      const foodId = action.payload;
+      let colorIndex = 0;
+      const updatedFoods = state.foods.filter(({ _id }, i) => {
+        if (_id === foodId) {
+          colorIndex = i;
+        }
+        return _id !== foodId;
+      });
 
+      const updatedColors = state.foodCardColors.filter(
+        (_, i) => i !== colorIndex
+      );
+
+      return {
+        ...state,
+        foods: updatedFoods,
+        foodCardColors: updatedColors,
+      };
     case RESET_FOOD:
       return {
         ...state,
