@@ -42,7 +42,7 @@ export const Login = () => {
             onChange={(e) =>
               dispatch(userLoginInput({ ...userInput, email: e.target.value }))
             }
-            type="text"
+            type="email"
             placeholder="enter email"
             className="mt-1 border-2 border-gray-300 rounded-md px-2 outline-none focus:border-violet-400"
           />
@@ -56,7 +56,7 @@ export const Login = () => {
                 userLoginInput({ ...userInput, password: e.target.value })
               )
             }
-            type="text"
+            type="password"
             placeholder="enter password"
             className="mt-1 border-2 border-gray-300 rounded-md px-2 outline-none focus:border-violet-400"
           />
@@ -77,6 +77,21 @@ export const Login = () => {
         >
           Login
         </button>
+
+        <p
+          onClick={() =>
+            dispatch(
+              userLoginInput({
+                ...userInput,
+                email: "testuser1@domain.com",
+                password: "testuser1",
+              })
+            )
+          }
+          className="hover:underline cursor-pointer self-center"
+        >
+          Set test credentials
+        </p>
       </form>
     </div>
   );
