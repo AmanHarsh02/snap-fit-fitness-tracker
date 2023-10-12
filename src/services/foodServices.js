@@ -17,9 +17,9 @@ const addFood = async (foodData) => {
       }
     );
 
-    const { createdFood } = response.data;
+    const { addedFood } = response.data;
 
-    return createdFood;
+    return addedFood;
   } catch (error) {
     throw error;
   }

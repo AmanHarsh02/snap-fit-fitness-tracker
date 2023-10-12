@@ -7,7 +7,7 @@ import {
   SET_GOAL_INPUT,
   SET_GOAL_LOADING,
 } from "../actionConstants";
-import { validateExerciseInput } from "../../utils/validationUtils";
+import { validateGoalInput } from "../../utils/validationUtils";
 import { addGoal, getGoals } from "../../services/goalServices";
 
 export const goalInput = (userInput) => ({
@@ -19,7 +19,16 @@ export const addNewGoal = (userInput, userId) => async (dispatch) => {
   try {
     dispatch({ type: SET_GOAL_LOADING });
 
-    const isValidated = validateExerciseInput(userInput);
+    const date = new Date();
+    const targetDate = new Date(userInput.targetDate);
+
+    if (targetDate <= date) {
+      throw new Error("Please select the target date in future");
+    } else {
+      dispatch({ type: SET_GOAL_ERROR, payload: "" });
+    }
+
+    const isValidated = validateGoalInput(userInput);
 
     if (!isValidated) {
       throw new Error("Please select all the required fields");

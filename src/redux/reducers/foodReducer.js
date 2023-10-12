@@ -6,6 +6,7 @@ import {
   SET_FOOD_ERROR,
   SET_FOOD_INPUT,
   SET_FOOD_LOADING,
+  RESET_FOOD,
 } from "../actionConstants";
 import randomColor from "randomcolor";
 
@@ -69,6 +70,19 @@ export const foodReducer = (state = initialState, action) => {
         ...state,
         foodError: action.payload,
         foodLoading: false,
+      };
+
+    case RESET_FOOD:
+      return {
+        ...state,
+        foodInput: {
+          foodName: "",
+          calories: 0,
+          protein: 0,
+          carbohydrates: 0,
+          fat: 0,
+        },
+        foodError: "",
       };
     default:
       return { ...state };

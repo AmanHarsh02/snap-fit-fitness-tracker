@@ -39,6 +39,7 @@ export const ADD_FOOD_CARD_COLOR = "add_food_card_color";
 
 export const SET_FOOD_LOADING = "set_food_loading";
 export const SET_FOOD_ERROR = "set_food_error";
+export const RESET_FOOD = "reset_food";
 
 // ***** Goals Actions *****
 
@@ -52,3 +53,4 @@ export const ADD_GOAL_CARD_COLOR = "add_goal_card_color";
 
 export const SET_GOAL_LOADING = "set_goal_loading";
 export const SET_GOAL_ERROR = "set_goal_error";
+export const RESET_GOAL = "reset_goal";

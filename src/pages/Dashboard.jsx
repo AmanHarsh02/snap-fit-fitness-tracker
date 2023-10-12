@@ -1,6 +1,8 @@
 import { useCallback, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getAllExercises } from "../redux/actions/exerciseActions";
+import { getAllFoods } from "../redux/actions/foodActions";
+import { getAllGoals } from "../redux/actions/goalActions";
 
 export const Dashboard = () => {
   const exercises = useSelector((state) => state.exerciseState.exercises);
@@ -10,6 +12,8 @@ export const Dashboard = () => {
   const debouncedGetAllExercises = useCallback(() => {
     if (exercises.length <= 0) {
       dispatch(getAllExercises(userId));
+      dispatch(getAllFoods(userId));
+      dispatch(getAllGoals(userId));
     }
   }, [exercises, userId, dispatch]);
 

@@ -46,7 +46,7 @@ export const Exercises = () => {
               })
             )
           }
-          className="border-2 border-blue-500 outline-blue-500 rounded-md"
+          className="border-2 outline-2 outline-blue-500 rounded-md"
         >
           {exerciseList.map((exercise) => {
             return (
@@ -66,7 +66,7 @@ export const Exercises = () => {
               })
             )
           }
-          className="border-2 border-blue-500 outline-blue-500 rounded-md"
+          className="border-2 outline-2 outline-blue-500 rounded-md"
         >
           {durationList.map((duration, i) => {
             return (

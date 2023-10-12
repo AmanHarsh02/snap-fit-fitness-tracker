@@ -31,4 +31,37 @@ const validateExerciseInput = (userInput) => {
   return true;
 };
 
-export { validateSignupInput, validateLoginInput, validateExerciseInput };
+const validateFoodInput = (userInput) => {
+  const { foodName, calories, protein, carbohydrates, fat } = userInput;
+
+  if (!foodName || !calories || !protein || !carbohydrates || !fat) {
+    return false;
+  }
+
+  return true;
+};
+
+const validateGoalInput = (userInput) => {
+  const { goalName, goalDescription, targetDate, targetCaloriesValue, status } =
+    userInput;
+
+  if (
+    !goalName ||
+    !goalDescription ||
+    !targetDate ||
+    !targetCaloriesValue ||
+    !status
+  ) {
+    return false;
+  }
+
+  return true;
+};
+
+export {
+  validateSignupInput,
+  validateLoginInput,
+  validateExerciseInput,
+  validateFoodInput,
+  validateGoalInput,
+};

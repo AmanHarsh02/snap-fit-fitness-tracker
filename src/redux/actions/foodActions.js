@@ -7,7 +7,10 @@ import {
   SET_FOOD_INPUT,
   SET_FOOD_LOADING,
 } from "../actionConstants";
-import { validateExerciseInput } from "../../utils/validationUtils";
+import {
+  validateExerciseInput,
+  validateFoodInput,
+} from "../../utils/validationUtils";
 import { addFood, getFoods } from "../../services/foodServices";
 
 export const foodInput = (userInput) => ({
@@ -19,7 +22,7 @@ export const addNewFood = (userInput, userId) => async (dispatch) => {
   try {
     dispatch({ type: SET_FOOD_LOADING });
 
-    const isValidated = validateExerciseInput(userInput);
+    const isValidated = validateFoodInput(userInput);
 
     if (!isValidated) {
       throw new Error("Please select all the required fields");

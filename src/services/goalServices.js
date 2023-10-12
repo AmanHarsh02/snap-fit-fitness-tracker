@@ -17,9 +17,9 @@ const addGoal = async (goalData) => {
       }
     );
 
-    const { createdGoal } = response.data;
+    const { addedGoal } = response.data;
 
-    return createdGoal;
+    return addedGoal;
   } catch (error) {
     throw error;
   }
