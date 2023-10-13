@@ -15,12 +15,12 @@ export const Dashboard = () => {
   const colors = [random(), random(), random(), random()];
 
   const debouncedGetAllExercises = useCallback(() => {
-    if (exercises.length <= 0) {
+    if (exercises.length <= 0 && foods.length <= 0 && goals.length <= 0) {
       dispatch(getAllExercises(userId));
       dispatch(getAllFoods(userId));
       dispatch(getAllGoals(userId));
     }
-  }, [exercises, userId, dispatch]);
+  }, [exercises, foods, goals, userId, dispatch]);
 
   useEffect(() => {
     const timer = setTimeout(debouncedGetAllExercises, 0);
