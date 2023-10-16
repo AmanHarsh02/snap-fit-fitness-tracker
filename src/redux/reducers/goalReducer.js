@@ -32,7 +32,7 @@ export const goalReducer = (state = initialState, action) => {
     case SET_GOALS:
       return {
         ...state,
-        goals: [...state.goals, ...action.payload],
+        goals: [...action.payload],
         goalLoading: false,
         goalError: "",
       };

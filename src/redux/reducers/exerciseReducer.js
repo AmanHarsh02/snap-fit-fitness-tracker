@@ -28,7 +28,7 @@ export const exerciseReducer = (state = initialState, action) => {
     case SET_EXERCISES:
       return {
         ...state,
-        exercises: [...state.exercises, ...action.payload],
+        exercises: [...action.payload],
         exerciseLoading: false,
         exerciseError: "",
       };

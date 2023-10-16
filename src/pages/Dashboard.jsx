@@ -1,4 +1,4 @@
-import { useCallback, useEffect } from "react";
+import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getAllExercises } from "../redux/actions/exerciseActions";
 import { getAllFoods } from "../redux/actions/foodActions";
@@ -14,19 +14,13 @@ export const Dashboard = () => {
   const random = () => randomColor({ luminosity: "light", format: "hex" });
   const colors = [random(), random(), random(), random()];
 
-  const debouncedGetAllExercises = useCallback(() => {
+  useEffect(() => {
     if (exercises.length <= 0 && foods.length <= 0 && goals.length <= 0) {
       dispatch(getAllExercises(userId));
       dispatch(getAllFoods(userId));
       dispatch(getAllGoals(userId));
     }
-  }, [exercises, foods, goals, userId, dispatch]);
-
-  useEffect(() => {
-    const timer = setTimeout(debouncedGetAllExercises, 0);
-
-    return () => clearTimeout(timer);
-  }, [debouncedGetAllExercises]);
+  }, []);
 
   const totalCaloriesBurned = exercises.reduce(
     (total, curr) => (total += curr.caloriesBurned),

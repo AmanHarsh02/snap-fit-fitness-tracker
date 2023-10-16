@@ -32,7 +32,7 @@ export const foodReducer = (state = initialState, action) => {
     case SET_FOODS:
       return {
         ...state,
-        foods: [...state.foods, ...action.payload],
+        foods: [...action.payload],
         foodLoading: false,
         foodError: "",
       };
